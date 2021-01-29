@@ -6,8 +6,6 @@ function Register() {
     console.log({ registerFormValues });
   }
 
-  console.log('here');
-
   return (
     <div>
       <RegisterForm onSubmitRegisterForm={onSubmitRegisterForm} />

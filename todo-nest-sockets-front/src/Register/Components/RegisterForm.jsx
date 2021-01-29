@@ -18,10 +18,15 @@ function RegisterForm(props) {
   const {
     errors,
     handleChange,
-    onSubmit,
+    handleSubmit,
     touched,
     values,
   } = useFormik(formikConfig);
+
+  function onSubmit(event) {
+    event.preventDefault();
+    handleSubmit();
+  }
 
   return (
     <div>
