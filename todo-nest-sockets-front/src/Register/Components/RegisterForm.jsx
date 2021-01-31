@@ -19,6 +19,7 @@ function RegisterForm(props) {
     errors,
     handleChange,
     handleSubmit,
+    isValid,
     touched,
     values,
   } = useFormik(formikConfig);
@@ -27,6 +28,8 @@ function RegisterForm(props) {
     event.preventDefault();
     handleSubmit();
   }
+
+  console.log({ isValid });
 
   return (
     <div>
@@ -43,10 +46,10 @@ function RegisterForm(props) {
                 value={values.firstName}
             />
             <TextField
-                data-testid={`${blockName}--lastName_input`}
                 error={touched.lastName && Boolean(errors.lastName)}
                 fullWidth
                 helperText={touched.lastName && errors.lastName}
+                inputProps={{ 'data-testid': `${blockName}--lastName_input` }}
                 id={`${blockName}--lastName_input`}
                 label="Last Name"
                 name="lastName"
@@ -54,22 +57,22 @@ function RegisterForm(props) {
                 value={values.lastName}
             />
             <TextField
-                data-testid={`${blockName}--email_input`}
                 error={touched.email && Boolean(errors.email)}
                 fullWidth
                 helperText={touched.email && errors.email}
                 id={`${blockName}--email_input`}
+                inputProps={{ 'data-testid': `${blockName}--email_input` }}
                 label="Email"
                 name="email"
                 onChange={handleChange}
                 value={values.email}
             />
             <TextField
-                data-testid={`${blockName}--password_input`}
                 error={touched.password && Boolean(errors.password)}
                 fullWidth
                 helperText={touched.password && errors.password}
                 id={`${blockName}--password_input`}
+                inputProps={{ 'data-testid': `${blockName}--password_input` }}
                 label="Password"
                 name="password"
                 onChange={handleChange}
@@ -78,6 +81,7 @@ function RegisterForm(props) {
             <Button
                 data-testid={`${blockName}--submit-button`}
                 color="primary"
+                disabled={!isValid}
                 fullWidth
                 id={`${blockName}--submit-button`}
                 type="submit"

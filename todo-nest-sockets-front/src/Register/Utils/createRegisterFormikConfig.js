@@ -25,7 +25,8 @@ const validationSchema = yup.object({
 });
 
 export default (onSubmit) => ({
+  validateOnMount: true,
   initialValues,
-  validationSchema,
   onSubmit,
+  validationSchema,
 });
