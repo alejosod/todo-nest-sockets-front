@@ -35,6 +35,7 @@ function RegisterForm(props) {
                 error={touched.firstName && Boolean(errors.firstName)}
                 fullWidth
                 helperText={touched.firstName && errors.firstName}
+                inputProps={{ 'data-testid': `${blockName}--firstName_input` }}
                 id={`${blockName}--firstName_input`}
                 label="First Name"
                 name="firstName"
@@ -42,6 +43,7 @@ function RegisterForm(props) {
                 value={values.firstName}
             />
             <TextField
+                data-testid={`${blockName}--lastName_input`}
                 error={touched.lastName && Boolean(errors.lastName)}
                 fullWidth
                 helperText={touched.lastName && errors.lastName}
@@ -52,6 +54,7 @@ function RegisterForm(props) {
                 value={values.lastName}
             />
             <TextField
+                data-testid={`${blockName}--email_input`}
                 error={touched.email && Boolean(errors.email)}
                 fullWidth
                 helperText={touched.email && errors.email}
@@ -62,6 +65,7 @@ function RegisterForm(props) {
                 value={values.email}
             />
             <TextField
+                data-testid={`${blockName}--password_input`}
                 error={touched.password && Boolean(errors.password)}
                 fullWidth
                 helperText={touched.password && errors.password}
@@ -72,8 +76,10 @@ function RegisterForm(props) {
                 value={values.password}
             />
             <Button
+                data-testid={`${blockName}--submit-button`}
                 color="primary"
                 fullWidth
+                id={`${blockName}--submit-button`}
                 type="submit"
                 variant="contained"
             >

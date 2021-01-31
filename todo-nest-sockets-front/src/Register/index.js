@@ -1,3 +1,3 @@
-import Register from './Components/Register.jsx';
+import Register from './Components';
 
 export default Register;
