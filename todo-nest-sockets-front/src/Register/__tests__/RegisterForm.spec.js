@@ -188,6 +188,30 @@ describe('RegisterForm Component', () => {
     expect(formButton).toBeDisabled();
   });
 
+  it('should not let you click the button if the form do not contains a password', async () => {
+    const testValue = 'test';
+    const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const firstNameInput = await findByTestId(`${blockName}--firstName_input`);
+    const lastNameInput = await findByTestId(`${blockName}--lastName_input`);
+    const emailInput = await findByTestId(`${blockName}--email_input`);
+    const formButton = await findByTestId(`${blockName}--submit-button`);
+
+    await act(async () => {
+      await fireEvent.change(firstNameInput, {
+        target: { value: testValue },
+      });
+      await fireEvent.change(emailInput, {
+        target: { value: testValue },
+      });
+      await fireEvent.change(lastNameInput, {
+        target: { value: testValue },
+      });
+    });
+
+    expect(formButton).toBeDisabled();
+  });
+
   it('should not let you click the button if the form contains an invalid password', async () => {
     const testValue = 'Password1';
     const invalidPasswordTest = 'Password'
@@ -211,30 +235,6 @@ describe('RegisterForm Component', () => {
       })
       await fireEvent.change(passwordInput, {
         target: { value: invalidPasswordTest },
-      });
-    });
-
-    expect(formButton).toBeDisabled();
-  });
-
-  it('should not let you click the button if the form do not contains a password', async () => {
-    const testValue = 'test';
-    const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
-
-    const firstNameInput = await findByTestId(`${blockName}--firstName_input`);
-    const lastNameInput = await findByTestId(`${blockName}--lastName_input`);
-    const emailInput = await findByTestId(`${blockName}--email_input`);
-    const formButton = await findByTestId(`${blockName}--submit-button`);
-
-    await act(async () => {
-      await fireEvent.change(firstNameInput, {
-        target: { value: testValue },
-      });
-      await fireEvent.change(emailInput, {
-        target: { value: testValue },
-      });
-      await fireEvent.change(lastNameInput, {
-        target: { value: testValue },
       });
     });
 

@@ -20,6 +20,7 @@ function RegisterForm(props) {
     handleChange,
     handleSubmit,
     isValid,
+    setFieldTouched,
     touched,
     values,
   } = useFormik(formikConfig);
@@ -27,6 +28,12 @@ function RegisterForm(props) {
   function onSubmit(event) {
     event.preventDefault();
     handleSubmit();
+  }
+
+  function onBlur(field) {
+    return function () {
+      setFieldTouched(field, true);
+    };
   }
 
   return (
@@ -40,6 +47,7 @@ function RegisterForm(props) {
                 id={`${blockName}--firstName_input`}
                 label="First Name"
                 name="firstName"
+                onBlur={onBlur('firstName')}
                 onChange={handleChange}
                 value={values.firstName}
             />
@@ -51,6 +59,7 @@ function RegisterForm(props) {
                 id={`${blockName}--lastName_input`}
                 label="Last Name"
                 name="lastName"
+                onBlur={onBlur('lastName')}
                 onChange={handleChange}
                 value={values.lastName}
             />
@@ -62,6 +71,7 @@ function RegisterForm(props) {
                 inputProps={{ 'data-testid': `${blockName}--email_input` }}
                 label="Email"
                 name="email"
+                onBlur={onBlur('email')}
                 onChange={handleChange}
                 value={values.email}
             />
@@ -73,6 +83,7 @@ function RegisterForm(props) {
                 inputProps={{ 'data-testid': `${blockName}--password_input` }}
                 label="Password"
                 name="password"
+                onBlur={onBlur('password')}
                 onChange={handleChange}
                 value={values.password}
             />
