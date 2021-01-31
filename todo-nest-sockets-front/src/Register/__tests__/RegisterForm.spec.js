@@ -47,6 +47,54 @@ describe('RegisterForm Component', () => {
     expect(formButton).toBeDisabled();
   });
 
+  it('should not let you click the button if the form do not contains a lastName', async () => {
+    const testValue = 'test';
+    const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const firstNameInput = await findByTestId(`${blockName}--firstName_input`);
+    const lastNameInput = await findByTestId(`${blockName}--lastName_input`);
+    const passwordInput = await findByTestId(`${blockName}--password_input`);
+    const formButton = await findByTestId(`${blockName}--submit-button`);
+
+    await act(async () => {
+      await fireEvent.change(firstNameInput, {
+        target: { value: testValue },
+      });
+      await fireEvent.change(lastNameInput, {
+        target: { value: testValue },
+      });
+      await fireEvent.change(passwordInput, {
+        target: { value: testValue },
+      });
+    });
+
+    expect(formButton).toBeDisabled();
+  });
+
+  it('should not let you click the button if the form do not contains an email', async () => {
+    const testValue = 'test';
+    const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const firstNameInput = await findByTestId(`${blockName}--firstName_input`);
+    const lastNameInput = await findByTestId(`${blockName}--lastName_input`);
+    const emailInput = await findByTestId(`${blockName}--email_input`);
+    const formButton = await findByTestId(`${blockName}--submit-button`);
+
+    await act(async () => {
+      await fireEvent.change(firstNameInput, {
+        target: { value: testValue },
+      });
+      await fireEvent.change(emailInput, {
+        target: { value: testValue },
+      });
+      await fireEvent.change(lastNameInput, {
+        target: { value: testValue },
+      });
+    });
+
+    expect(formButton).toBeDisabled();
+  });
+
   it('typing firstname field should change its value', async () => {
     const testValue = 'alejandro';
 

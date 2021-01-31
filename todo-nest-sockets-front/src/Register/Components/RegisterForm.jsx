@@ -29,8 +29,6 @@ function RegisterForm(props) {
     handleSubmit();
   }
 
-  console.log({ isValid });
-
   return (
     <div>
         <form onSubmit={onSubmit}>
