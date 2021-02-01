@@ -1,17 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {
+  Button,
+  Card,
+  TextField,
+} from '@material-ui/core';
 import { useFormik } from 'formik';
-import { Button, TextField } from '@material-ui/core';
+import { withStyles } from '@material-ui/styles';
 import createRegisterFormikConfig from '../Utils/createRegisterFormikConfig';
-
-const propTypes = {
-  onSubmitRegisterForm: PropTypes.func.isRequired,
-};
+import styles from './RegisterForm.Styles';
 
 const blockName = 'register_form';
 
-function RegisterForm(props) {
-  const { onSubmitRegisterForm } = props;
+const propTypes = {
+  classes: PropTypes.shape({
+    root: PropTypes.string,
+  }).isRequired,
+  onSubmitRegisterForm: PropTypes.func.isRequired,
+};
+
+function RegisterFormComponent(props) {
+  const {
+    classes,
+    onSubmitRegisterForm,
+  } = props;
 
   const formikConfig = createRegisterFormikConfig(onSubmitRegisterForm);
 
@@ -37,7 +49,10 @@ function RegisterForm(props) {
   }
 
   return (
-    <div>
+    <Card
+        id={`${blockName}--register-form-root`}
+        className={classes.root}
+    >
         <form onSubmit={onSubmit}>
             <TextField
                 error={touched.firstName && Boolean(errors.firstName)}
@@ -99,10 +114,10 @@ function RegisterForm(props) {
                 Register
             </Button>
         </form>
-    </div>
+    </Card>
   );
 }
 
-RegisterForm.propTypes = propTypes;
+RegisterFormComponent.propTypes = propTypes;
 
-export default RegisterForm;
+export default withStyles(styles)(RegisterFormComponent);

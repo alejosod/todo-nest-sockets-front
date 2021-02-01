@@ -1,5 +1,6 @@
 import React from 'react';
-import RegisterForm from './RegisterForm.jsx';
+import RegisterForm from './RegisterForm.Component.jsx';
+import RegisterBackground from './RegisterBackground.Component.jsx';
 
 function Register() {
   function onSubmitRegisterForm(registerFormValues) {
@@ -8,6 +9,7 @@ function Register() {
 
   return (
     <div>
+      <RegisterBackground />
       <RegisterForm onSubmitRegisterForm={onSubmitRegisterForm} />
     </div>
   );
