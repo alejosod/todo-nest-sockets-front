@@ -111,6 +111,32 @@ describe('RegisterForm Component', () => {
     expect(formButton).toBeDisabled();
   });
 
+  it('should make the user aware of the field is invalid', async () => {
+    const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const fistNameInput = await findByTestId(`${blockName}--firstName_input`)
+
+    await act(async () => {
+      await fireEvent.blur(fistNameInput,);
+    })
+
+    expect(fistNameInput).toContainHTML('aria-invalid="true"')
+  })
+
+  it('should shows a message indicating the error to the user', async () => {
+    const { findByTestId, getByText } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const fistNameInput = await findByTestId(`${blockName}--firstName_input`)
+
+    await act(async () => {
+      await fireEvent.blur(fistNameInput,);
+    })
+
+    const firstNameErrorMessage = await getByText('Name is Required')
+
+    expect(firstNameErrorMessage).toBeVisible()
+  })
+
   it('should not let you click the button if the form do not contains a lastName', async () => {
     const testValue = 'test';
     const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
@@ -134,6 +160,32 @@ describe('RegisterForm Component', () => {
 
     expect(formButton).toBeDisabled();
   });
+
+  it('should make the user aware of the lastName field is invalid', async () => {
+    const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const lastNameInput = await findByTestId(`${blockName}--lastName_input`)
+
+    await act(async () => {
+      await fireEvent.blur(lastNameInput,);
+    })
+
+    expect(lastNameInput).toContainHTML('aria-invalid="true"')
+  })
+
+  it('should shows a message indicating the error the lastName field have to the user', async () => {
+    const { findByTestId, getByText } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const lastNameInput = await findByTestId(`${blockName}--lastName_input`)
+
+    await act(async () => {
+      await fireEvent.blur(lastNameInput,);
+    })
+
+    const lastNameErrorMessage = await getByText('Last Name is Required')
+
+    expect(lastNameErrorMessage).toBeVisible()
+  })
 
   it('should not let you click the button if the form do not contains an email', async () => {
     const testValue = 'test';
@@ -188,6 +240,49 @@ describe('RegisterForm Component', () => {
     expect(formButton).toBeDisabled();
   });
 
+  it('should make the user aware of the email field is invalid', async () => {
+    const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const emailInput = await findByTestId(`${blockName}--email_input`)
+
+    await act(async () => {
+      await fireEvent.blur(emailInput,);
+    })
+
+    expect(emailInput).toContainHTML('aria-invalid="true"')
+  })
+
+  it('should shows a message indicating the error the email field have to the user is nothing is supplied', async () => {
+    const { findByTestId, getByText } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const emailInput = await findByTestId(`${blockName}--email_input`)
+
+    await act(async () => {
+      await fireEvent.blur(emailInput,);
+    })
+
+    const emailErrorMessage = await getByText('Email is required')
+
+    expect(emailErrorMessage).toBeVisible()
+  })
+
+  it('should shows a message indicating the error the email field have to the user if an invalid email is provided', async () => {
+    const { findByTestId, getByText } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const emailInput = await findByTestId(`${blockName}--email_input`)
+
+    await act(async () => {
+      await fireEvent.change(emailInput, {
+        target: { value: 'invalid@email'}
+      });
+      await fireEvent.blur(emailInput,);
+    })
+
+    const emailErrorMessage = await getByText('Enter a valid email')
+
+    expect(emailErrorMessage).toBeVisible()
+  })
+
   it('should not let you click the button if the form do not contains a password', async () => {
     const testValue = 'test';
     const { findByTestId } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
@@ -211,6 +306,37 @@ describe('RegisterForm Component', () => {
 
     expect(formButton).toBeDisabled();
   });
+
+  it('should shows a message indicating the error the email field have to the user if an invalid email is provided', async () => {
+    const { findByTestId, getByText } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const passwordInput = await findByTestId(`${blockName}--password_input`)
+
+    await act(async () => {
+      await fireEvent.change(passwordInput, {
+        target: { value: 'Invalid'}
+      });
+      await fireEvent.blur(passwordInput,);
+    })
+
+    const passwordErrorMessage = await getByText('Invalid Password, it should contain at least, one lower case letter, one upper case letter, and one number')
+
+    expect(passwordErrorMessage).toBeVisible()
+  })
+
+  it('should shows a message indicating the error the email field have to the user if an no email is provided', async () => {
+    const { findByTestId, getByText } = await render(<RegisterForm onSubmitRegisterForm={() => {}} />);
+
+    const passwordInput = await findByTestId(`${blockName}--password_input`)
+
+    await act(async () => {
+      await fireEvent.blur(passwordInput,);
+    })
+
+    const passwordErrorMessage = await getByText('Password Is required')
+
+    expect(passwordErrorMessage).toBeVisible()
+  })
 
   it('should not let you click the button if the form contains an invalid password', async () => {
     const testValue = 'Password1';

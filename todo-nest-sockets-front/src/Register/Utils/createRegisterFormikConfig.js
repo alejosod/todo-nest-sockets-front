@@ -20,7 +20,7 @@ const validationSchema = yup.object({
     .trim()
     .required('Email is required'),
   password: yup.string('Enter Your Password')
-    .matches(regex)
+    .matches(regex, 'Invalid Password, it should contain at least, one lower case letter, one upper case letter, and one number')
     .required('Password Is required'),
 });
 
