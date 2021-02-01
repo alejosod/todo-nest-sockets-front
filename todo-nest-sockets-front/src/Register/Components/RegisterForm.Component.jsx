@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Button,
-  Card,
+  Paper,
   TextField,
 } from '@material-ui/core';
 import { useFormik } from 'formik';
@@ -14,6 +14,7 @@ const blockName = 'register_form';
 
 const propTypes = {
   classes: PropTypes.shape({
+    form: PropTypes.string,
     root: PropTypes.string,
   }).isRequired,
   onSubmitRegisterForm: PropTypes.func.isRequired,
@@ -49,11 +50,15 @@ function RegisterFormComponent(props) {
   }
 
   return (
-    <Card
+    <Paper
         id={`${blockName}--register-form-root`}
         className={classes.root}
+        elevation={3}
     >
-        <form onSubmit={onSubmit}>
+        <form
+            className={classes.form}
+            onSubmit={onSubmit}
+        >
             <TextField
                 error={touched.firstName && Boolean(errors.firstName)}
                 fullWidth
@@ -65,6 +70,7 @@ function RegisterFormComponent(props) {
                 onBlur={onBlur('firstName')}
                 onChange={handleChange}
                 value={values.firstName}
+                variant='outlined'
             />
             <TextField
                 error={touched.lastName && Boolean(errors.lastName)}
@@ -77,6 +83,7 @@ function RegisterFormComponent(props) {
                 onBlur={onBlur('lastName')}
                 onChange={handleChange}
                 value={values.lastName}
+                variant='outlined'
             />
             <TextField
                 error={touched.email && Boolean(errors.email)}
@@ -89,6 +96,7 @@ function RegisterFormComponent(props) {
                 onBlur={onBlur('email')}
                 onChange={handleChange}
                 value={values.email}
+                variant='outlined'
             />
             <TextField
                 error={touched.password && Boolean(errors.password)}
@@ -101,6 +109,7 @@ function RegisterFormComponent(props) {
                 onBlur={onBlur('password')}
                 onChange={handleChange}
                 value={values.password}
+                variant='outlined'
             />
             <Button
                 data-testid={`${blockName}--submit-button`}
@@ -108,13 +117,14 @@ function RegisterFormComponent(props) {
                 disabled={!isValid}
                 fullWidth
                 id={`${blockName}--submit-button`}
+                size="large"
                 type="submit"
-                variant="contained"
+                variant="outlined"
             >
                 Register
             </Button>
         </form>
-    </Card>
+    </Paper>
   );
 }
 

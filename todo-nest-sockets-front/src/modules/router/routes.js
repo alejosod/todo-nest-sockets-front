@@ -1,6 +1,6 @@
-import Register from '../../Register';
+import RegisterComponent from '../../Register';
 
 export default [
   { path: '/', exact: true, component: null },
-  { path: '/register', exact: true, component: Register },
+  { path: '/register', exact: true, component: RegisterComponent },
 ];

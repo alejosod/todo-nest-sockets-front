@@ -1,9 +1,7 @@
-import Register from './Register.jsx';
+import RegisterComponent from './Register.Component.jsx';
 import RegisterForm from './RegisterForm.Component.jsx';
-import RegisterBackground from './RegisterBackground.Component.jsx';
 
-export default Register;
+export default RegisterComponent;
 export {
   RegisterForm,
-  RegisterBackground,
 };
