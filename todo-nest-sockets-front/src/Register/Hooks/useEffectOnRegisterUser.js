@@ -8,10 +8,10 @@ function useEffectOnRegisterUser() {
   const history = useHistory();
 
   function effect() {
-    const { email, id } = userInfo;
+    const { email } = userInfo;
 
     if (email) {
-      history.push(`/todos/${id}`);
+      history.push('/login');
     }
   }
 

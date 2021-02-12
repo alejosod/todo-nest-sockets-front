@@ -32,7 +32,7 @@ function Register(props) {
       setUser(data);
       addToast('User Created Successfully', { appearance: 'success' });
     } catch (e) {
-      console.log({ e });
+      addToast(e?.response?.data?.error, { appearance: 'error' });
     }
   }
 
