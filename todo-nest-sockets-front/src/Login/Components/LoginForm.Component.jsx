@@ -6,15 +6,20 @@ import {
 } from '@material-ui/core';
 import styles from './LoginForm.Styles';
 import createLoginFormikConfig from '../Utils';
+import Login from './Login.Component';
 
 const blockName = 'login_form';
 
 const propTypes = {
-  classes: {
+  classes: PropTypes.shape({
     root: PropTypes.string.isRequired,
-  }.isRequired,
-  loading: PropTypes.bool.isRequired,
+  }).isRequired,
+  loading: PropTypes.bool,
   onSubmitLoginForm: PropTypes.func.isRequired,
+};
+
+const defaultProps = {
+  loading: false,
 };
 
 function LoginForm(props) {
@@ -103,6 +108,7 @@ function LoginForm(props) {
   );
 }
 
+LoginForm.defaultProps = defaultProps;
 LoginForm.propTypes = propTypes;
 
 export default withStyles(styles)(LoginForm);

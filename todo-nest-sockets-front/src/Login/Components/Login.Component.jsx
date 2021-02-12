@@ -32,7 +32,7 @@ function Login(props) {
       await sessionStorage.setItem(constants.localStorage.ACCESS_TOKEN, ACCESS_TOKEN);
       addToast('User Logged In Successfully', { appearance: 'success' });
       setLoadingStatus(false);
-      history.push('/home');
+      history.push('/setup');
     } catch (e) {
       setLoadingStatus(false);
       addToast(e?.response?.data?.message, { appearance: 'error' });
