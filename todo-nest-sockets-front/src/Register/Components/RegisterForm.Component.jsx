@@ -17,6 +17,7 @@ const propTypes = {
     form: PropTypes.string,
     root: PropTypes.string,
   }).isRequired,
+  /* Callback to be call at form submission. */
   onSubmitRegisterForm: PropTypes.func.isRequired,
 };
 
