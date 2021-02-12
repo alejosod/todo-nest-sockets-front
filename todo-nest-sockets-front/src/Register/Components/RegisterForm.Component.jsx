@@ -44,7 +44,7 @@ function RegisterFormComponent(props) {
   }
 
   function onBlur(field) {
-    return function () {
+    return function setFiledTouchedOnBlur() {
       setFieldTouched(field, true);
     };
   }
