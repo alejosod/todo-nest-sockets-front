@@ -1,8 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { useToasts } from 'react-toast-notifications';
+import { useSetRecoilState } from 'recoil';
 import { withStyles } from '@material-ui/styles';
+import axios from 'axios';
 import RegisterForm from './RegisterForm.Component.jsx';
 import styles from './Register.Styles';
+import user from '../../Recoil/User.Atom';
+import useEffectOnRegisterUser from '../Hooks/useEffectOnRegisterUser';
 
 const propTypes = {
   classes: PropTypes.shape({
@@ -13,8 +18,22 @@ const propTypes = {
 function Register(props) {
   const { classes } = props;
 
-  function onSubmitRegisterForm(registerFormValues) {
-    console.log({ registerFormValues });
+  const setUser = useSetRecoilState(user);
+  const { addToast } = useToasts();
+
+  useEffectOnRegisterUser();
+
+  async function onSubmitRegisterForm(registerFormValues) {
+    const url = `${process.env.REACT_APP_SERVER_URI}/user`;
+
+    try {
+      const { data } = await axios.post(url, registerFormValues);
+
+      setUser(data);
+      addToast('User Created Successfully', { appearance: 'success' });
+    } catch (e) {
+      console.log({ e });
+    }
   }
 
   return (

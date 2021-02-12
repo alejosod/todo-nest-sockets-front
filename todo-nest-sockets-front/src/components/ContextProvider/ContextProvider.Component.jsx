@@ -1,6 +1,8 @@
 import Proptypes from 'prop-types';
 import React from 'react';
+import { ToastProvider } from 'react-toast-notifications';
 import { MuiThemeProvider } from '@material-ui/core';
+import { RecoilRoot } from 'recoil';
 import theme from '../../modules/styles';
 
 const propTypes = {
@@ -11,9 +13,13 @@ function ContextProvider(props) {
   const { children } = props;
 
   return (
-        <MuiThemeProvider theme={theme} >
-            {children}
-        </MuiThemeProvider>
+      <RecoilRoot>
+          <ToastProvider autoDismiss>
+              <MuiThemeProvider theme={theme} >
+                  {children}
+              </MuiThemeProvider>
+          </ToastProvider>
+      </RecoilRoot>
   );
 }
 
