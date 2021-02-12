@@ -17,10 +17,10 @@ const propTypes = {
 function Login(props) {
   const { classes } = props;
 
+  const [loading, setLoadingStatus] = useState(false);
+
   const history = useHistory();
   const { addToast } = useToasts();
-
-  const [loading, setLoadingStatus] = useState(false);
 
   async function onSubmitLoginForm(loginFormValues) {
     setLoadingStatus(true);

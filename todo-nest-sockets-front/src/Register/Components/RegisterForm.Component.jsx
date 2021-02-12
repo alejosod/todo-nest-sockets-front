@@ -17,6 +17,7 @@ const propTypes = {
     form: PropTypes.string,
     root: PropTypes.string,
   }).isRequired,
+  loading: PropTypes.bool.isRequired,
   /* Callback to be call at form submission. */
   onSubmitRegisterForm: PropTypes.func.isRequired,
 };
@@ -24,6 +25,7 @@ const propTypes = {
 function RegisterFormComponent(props) {
   const {
     classes,
+    loading,
     onSubmitRegisterForm,
   } = props;
 
@@ -49,6 +51,9 @@ function RegisterFormComponent(props) {
       setFieldTouched(field, true);
     };
   }
+
+  const buttonText = loading ? 'Loading' : 'Register';
+  const isButtonDisabled = loading || !isValid;
 
   return (
     <Paper
@@ -115,14 +120,14 @@ function RegisterFormComponent(props) {
             <Button
                 data-testid={`${blockName}--submit-button`}
                 color="primary"
-                disabled={!isValid}
+                disabled={isButtonDisabled}
                 fullWidth
                 id={`${blockName}--submit-button`}
                 size="large"
                 type="submit"
                 variant="outlined"
             >
-                Register
+                {buttonText}
             </Button>
         </form>
     </Paper>
