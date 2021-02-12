@@ -6,13 +6,13 @@ import {
 } from '@material-ui/core';
 import styles from './LoginForm.Styles';
 import createLoginFormikConfig from '../Utils';
-import Login from './Login.Component';
 
 const blockName = 'login_form';
 
 const propTypes = {
   classes: PropTypes.shape({
-    root: PropTypes.string.isRequired,
+    form: PropTypes.string,
+    root: PropTypes.string,
   }).isRequired,
   loading: PropTypes.bool,
   onSubmitLoginForm: PropTypes.func.isRequired,
