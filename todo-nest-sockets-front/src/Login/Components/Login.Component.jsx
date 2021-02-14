@@ -29,7 +29,7 @@ function Login(props) {
     try {
       const { data: { access_token: ACCESS_TOKEN } } = await axios.post(url, loginFormValues);
 
-      await sessionStorage.setItem(constants.localStorage.ACCESS_TOKEN, ACCESS_TOKEN);
+      localStorage.setItem(constants.localStorage.ACCESS_TOKEN, ACCESS_TOKEN);
       addToast('User Logged In Successfully', { appearance: 'success' });
       setLoadingStatus(false);
       history.push('/setup');
